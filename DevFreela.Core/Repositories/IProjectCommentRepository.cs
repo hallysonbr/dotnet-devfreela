@@ -7,10 +7,9 @@ using System.Threading.Tasks;
 
 namespace DevFreela.Core.Repositories
 {
-    public interface IUserRepository
+    public interface IProjectCommentRepository
     {
-        Task<User> GetByIdAsync(int id);
-        Task AddAsync(User user);
+        Task AddAsync(ProjectComment projectComment);
         Task SaveChangesAsync();
     }
 }

@@ -11,5 +11,11 @@ namespace DevFreela.Core.Repositories
     {
         Task<List<Project>> GetAllAsync();
         Task<Project> GetByIdAsync(int id);
+        Task AddAsync(Project project);
+        Task StartAsync();
+        Task UpdateAsync();
+        Task FinishAsync();
+        Task DeleteAsync();
+        Task SaveChangesAsync();
     }
 }
