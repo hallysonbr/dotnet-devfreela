@@ -1,9 +1,9 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace DevFreela.Infrastructure.Persistence.Migrations
+namespace DevFreela.Infrastructure.Migrations
 {
-    public partial class InitialMigration : Migration
+    public partial class Migration_CreatingDatabase : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -78,21 +78,20 @@ namespace DevFreela.Infrastructure.Persistence.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     IdUser = table.Column<int>(type: "int", nullable: false),
-                    IdSkill = table.Column<int>(type: "int", nullable: false),
-                    SkillId = table.Column<int>(type: "int", nullable: true)
+                    IdSkill = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_UserSkills", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_UserSkills_Skills_SkillId",
-                        column: x => x.SkillId,
+                        name: "FK_UserSkills_Skills_IdSkill",
+                        column: x => x.IdSkill,
                         principalTable: "Skills",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_UserSkills_Users_IdSkill",
-                        column: x => x.IdSkill,
+                        name: "FK_UserSkills_Users_IdUser",
+                        column: x => x.IdUser,
                         principalTable: "Users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
@@ -152,9 +151,9 @@ namespace DevFreela.Infrastructure.Persistence.Migrations
                 column: "IdSkill");
 
             migrationBuilder.CreateIndex(
-                name: "IX_UserSkills_SkillId",
+                name: "IX_UserSkills_IdUser",
                 table: "UserSkills",
-                column: "SkillId");
+                column: "IdUser");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

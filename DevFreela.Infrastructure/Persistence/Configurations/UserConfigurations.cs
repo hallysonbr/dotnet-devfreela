@@ -18,8 +18,8 @@ namespace DevFreela.Infrastructure.Persistence.Configurations
 
             builder
                 .HasMany(p => p.Skills)
-                .WithOne()
-                .HasForeignKey(u => u.IdSkill)
+                .WithOne(u => u.User)
+                .HasForeignKey(u => u.IdUser)
                 .OnDelete(DeleteBehavior.Restrict);
         }
     }
