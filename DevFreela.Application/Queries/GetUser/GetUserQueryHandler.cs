@@ -14,7 +14,6 @@ namespace DevFreela.Application.Queries.GetUser
 {
     public class GetUserQueryHandler : IRequestHandler<GetUserQuery, UserViewModel>
     {
-        private readonly DevFreelaDbContext _dbContext;
         private readonly IUserRepository _userRepository;
 
         public GetUserQueryHandler(IUserRepository userRepository)
