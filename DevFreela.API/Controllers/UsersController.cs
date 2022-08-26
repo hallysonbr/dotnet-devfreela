@@ -1,6 +1,8 @@
 ﻿using DevFreela.API.Models;
 using DevFreela.Application.Commands.CreateUser;
+using DevFreela.Application.Commands.LoginUser;
 using DevFreela.Application.InputModels;
+using DevFreela.Application.Queries.GetUser;
 using DevFreela.Application.Services.Interfaces;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -26,9 +28,13 @@ namespace DevFreela.API.Controllers
 
         //api/users/1
         [HttpGet("{id}")]
-        public IActionResult GetById(int id)
+        public async Task<IActionResult> GetById(int id)
         {
-            var user = _userService.GetUser(id);
+            //var user = _userService.GetUser(id);
+
+            var userQuery = new GetUserQuery(id);
+
+            var user = await _mediator.Send(userQuery);
             if (user is null) return NotFound();
 
             return Ok(user);
@@ -44,13 +50,14 @@ namespace DevFreela.API.Controllers
             return CreatedAtAction(nameof(GetById), new { id = id }, command);
         }
 
-        //api/users/1/login
-        [HttpPut("{id}/login")]
-        public IActionResult Login(int id, [FromBody] LoginModel login)
+        //api/users/login
+        [HttpPut("login")]
+        public async Task<IActionResult> Login([FromBody] LoginUserCommand command)
         {
-            // TODO: Para Módulo de Autenticação e Autorização
+            var loginUserViewModel = await _mediator.Send(command);
+            if(loginUserViewModel is null) return BadRequest();
 
-            return NoContent();
+            return Ok(loginUserViewModel);
         }
     }
 }
