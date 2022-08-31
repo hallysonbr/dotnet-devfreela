@@ -1,4 +1,4 @@
-namespace DevFreela.Core.Service
+namespace DevFreela.Infrastructure.CrossCutting.Auth.Interfaces
 {
     public interface IAuthService
     {

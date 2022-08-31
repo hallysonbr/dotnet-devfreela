@@ -4,11 +4,11 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
-using DevFreela.Core.Service;
+using DevFreela.Infrastructure.CrossCutting.Auth.Interfaces;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 
-namespace DevFreela.Infrastructure.Auth
+namespace DevFreela.Infrastructure.CrossCutting.Auth.Implementations
 {
     public class AuthService : IAuthService
     {

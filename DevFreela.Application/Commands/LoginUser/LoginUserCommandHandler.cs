@@ -2,7 +2,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using DevFreela.Application.ViewModels;
 using DevFreela.Core.Repositories;
-using DevFreela.Core.Service;
+using DevFreela.Infrastructure.CrossCutting.Auth.Interfaces;
 using MediatR;
 
 namespace DevFreela.Application.Commands.LoginUser
