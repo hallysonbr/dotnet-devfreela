@@ -6,6 +6,8 @@ using DevFreela.Application.Validators;
 using DevFreela.Core.Repositories;
 using DevFreela.Infrastructure.CrossCutting.Auth.Implementations;
 using DevFreela.Infrastructure.CrossCutting.Auth.Interfaces;
+using DevFreela.Infrastructure.CrossCutting.Filters;
+using DevFreela.Infrastructure.CrossCutting.Middlewares;
 using DevFreela.Infrastructure.Persistence.Context;
 using DevFreela.Infrastructure.Persistence.Repositories;
 using FluentValidation.AspNetCore;
@@ -55,7 +57,11 @@ namespace DevFreela.API
 
             //services.AddScoped(e => new ExampleClass { Name = "Initial Stage" });
 
-            services.AddControllers(options => options.Filters.Add(typeof(ValidationFilter)))
+            services.AddControllers(options => 
+                                    {
+                                        options.Filters.Add(typeof(ValidationFilter));
+                                        options.Filters.Add(typeof(LogFilter));
+                                    })
                     .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<CreateUserCommandValidator>());
 
             services.AddMediatR(typeof(CreateProjectCommand));
@@ -118,6 +124,8 @@ namespace DevFreela.API
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "DevFreela.API v1"));
             }
+
+            app.UseExceptionHandlerMiddleware();
 
             app.UseHttpsRedirection();
 
