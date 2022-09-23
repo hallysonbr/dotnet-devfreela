@@ -38,7 +38,7 @@ namespace DevFreela.UnitTests.Application.Commands
         }
 
         [Fact]
-        public async Task InputDataIsInvalid_Executed_ReturnInvalid()
+        public async Task InputDataIsInvalid_Executed_ReturnTrue()
         {
             //Arrange
             var createProjectCommand = new CreateProjectCommand
