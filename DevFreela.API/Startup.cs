@@ -4,10 +4,12 @@ using DevFreela.Application.Services.Implementations;
 using DevFreela.Application.Services.Interfaces;
 using DevFreela.Application.Validators;
 using DevFreela.Core.Repositories;
+using DevFreela.Core.Services;
 using DevFreela.Infrastructure.CrossCutting.Auth.Implementations;
 using DevFreela.Infrastructure.CrossCutting.Auth.Interfaces;
 using DevFreela.Infrastructure.CrossCutting.Filters;
 using DevFreela.Infrastructure.CrossCutting.Middlewares;
+using DevFreela.Infrastructure.Payments;
 using DevFreela.Infrastructure.Persistence.Context;
 using DevFreela.Infrastructure.Persistence.Repositories;
 using FluentValidation.AspNetCore;
@@ -42,6 +44,8 @@ namespace DevFreela.API
             var connectionString = Configuration.GetConnectionString("DevFreelaCs");
             services.AddDbContext<DevFreelaDbContext>(options => options.UseSqlServer(connectionString));
 
+            services.AddHttpClient();
+
             //Para usar o EntityFramework em mem�ria (Precisa instalar pacote Microsoft.EntityFrameworkCore.InMemory)
             //services.AddDbContext<DevFreelaDbContext>(options => options.UseInMemoryDatabase(connectionString));
 
@@ -54,6 +58,7 @@ namespace DevFreela.API
             services.AddScoped<ISkillRepository, SkillRepository>();
             services.AddScoped<IProjectCommentRepository, ProjectCommentRepository>();
             services.AddScoped<IAuthService, AuthService>();
+            services.AddScoped<IPaymentService, PaymentService>();
 
             //services.AddScoped(e => new ExampleClass { Name = "Initial Stage" });
 
