@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using DevFreela.Application.Commands.CreateProject;
@@ -57,6 +59,45 @@ namespace DevFreela.UnitTests.Application.Commands
 
             //Asset
             Assert.True(validationResult.Errors.Count > 0);
+        }
+
+        [Fact]
+        public void Should_Return_True_When_String_Contains_Any_Word()
+        {
+            var projects = new List<Project>()
+            {
+                new Project("", "João Pessoa", 0, 0, 0),
+                new Project("", "João Pessoa", 0, 0, 0),
+                new Project("", "João Pessoa", 0, 0, 0),
+                new Project("", "João Pessoa", 0, 0, 0),
+                new Project("", "João Pessoa", 0, 0, 0),
+                new Project("", "Recife", 0, 0, 0),
+                new Project("", "Recife", 0, 0, 0),
+                new Project("", "Recife", 0, 0, 0),
+                new Project("", "Natal", 0, 0, 0),
+                new Project("", "Natal", 0, 0, 0),
+                new Project("", "Natal", 0, 0, 0),
+                new Project("", "Minas", 0, 0, 0),
+                new Project("", "Rio de Janeiro", 0, 0, 0),
+                new Project("", "Minas", 0, 0, 0),
+                new Project("", "Minas", 0, 0, 0),
+                new Project("", "Minas", 0, 0, 0),
+            };
+
+
+            string comparador = "Rio de Janeiro, São Paulo, Minas, Natal, Recife";            
+            comparador = "";
+
+            var retorno = projects.Where(p => comparador.Contains(p.Description)
+                                        || string.IsNullOrWhiteSpace(comparador))
+                                        .ToList();
+
+            //var retorno = projects.Where(p => lista.Any(l => p.Description.Contains(l))
+            //                            || string.IsNullOrEmpty(comparador))
+            //                            .ToList();
+
+            Assert.True(retorno.Count > 0);
+            Assert.NotNull(retorno);
         }
     }
 }
