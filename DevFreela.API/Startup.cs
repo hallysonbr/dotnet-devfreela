@@ -9,6 +9,8 @@ using DevFreela.Infrastructure.CrossCutting.Auth.Implementations;
 using DevFreela.Infrastructure.CrossCutting.Auth.Interfaces;
 using DevFreela.Infrastructure.CrossCutting.Filters;
 using DevFreela.Infrastructure.CrossCutting.Middlewares;
+using DevFreela.Infrastructure.CrossCutting.Services.MessageBus.Implementations;
+using DevFreela.Infrastructure.CrossCutting.Services.MessageBus.Interfaces;
 using DevFreela.Infrastructure.Payments;
 using DevFreela.Infrastructure.Persistence.Context;
 using DevFreela.Infrastructure.Persistence.Repositories;
@@ -57,8 +59,10 @@ namespace DevFreela.API
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<ISkillRepository, SkillRepository>();
             services.AddScoped<IProjectCommentRepository, ProjectCommentRepository>();
+
             services.AddScoped<IAuthService, AuthService>();
             services.AddScoped<IPaymentService, PaymentService>();
+            services.AddScoped<IMessageBusService, MessageBusService>();
 
             //services.AddScoped(e => new ExampleClass { Name = "Initial Stage" });
 
