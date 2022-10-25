@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿using DevFreela.Core.Entities;
+using MediatR;
 
 namespace DevFreela.Application.Commands.CreateProject
 {
@@ -9,5 +10,7 @@ namespace DevFreela.Application.Commands.CreateProject
         public int IdClient { get; set; }
         public int IdFreelancer { get; set; }
         public decimal TotalCost { get; set; }
+
+        public Project ToEntity() => new Project(Title, Description, IdClient, IdFreelancer, TotalCost);
     }
 }

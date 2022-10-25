@@ -1,4 +1,6 @@
-﻿using System;
+﻿using DevFreela.Core.Entities;
+using System;
+using System.Security.Cryptography;
 
 namespace DevFreela.Application.ViewModels
 {
@@ -14,5 +16,10 @@ namespace DevFreela.Application.ViewModels
         public int Id { get; private set; }
         public string Title { get; private set; }
         public DateTime CreatedAt { get; private set; }
+
+        public static ProjectViewModel FromEntity(Project project)
+        {
+            return new ProjectViewModel(project.Id, project.Title, project.CreatedAt);
+        }
     }
 }
