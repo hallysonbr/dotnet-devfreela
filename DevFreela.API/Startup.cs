@@ -1,5 +1,6 @@
 using DevFreela.API.Filters;
 using DevFreela.Application.Commands.CreateProject;
+using DevFreela.Application.Consumers;
 using DevFreela.Application.Services.Implementations;
 using DevFreela.Application.Services.Interfaces;
 using DevFreela.Application.Validators;
@@ -63,6 +64,8 @@ namespace DevFreela.API
             services.AddScoped<IAuthService, AuthService>();
             services.AddScoped<IPaymentService, PaymentService>();
             services.AddScoped<IMessageBusService, MessageBusService>();
+
+            services.AddHostedService<PaymentApprovedConsumer>();
 
             //services.AddScoped(e => new ExampleClass { Name = "Initial Stage" });
 
