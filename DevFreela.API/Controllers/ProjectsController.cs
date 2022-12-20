@@ -30,13 +30,11 @@ namespace DevFreela.API.Controllers
         //api/projects?query=net core
         [HttpGet]
         [Authorize(Roles = "client, freelancer")]
-        public async Task<IActionResult> Get(string query)
-        {
-            var getAllProjectQuery = new GetAllProjectsQuery(query);
-
+        public async Task<IActionResult> Get(GetAllProjectsQuery getAllProjectsquery)       {
+           
             //var projects = _projectService.GetAll(query);
 
-            var projects = await _mediator.Send(getAllProjectQuery);
+            var projects = await _mediator.Send(getAllProjectsquery);
             return Ok(projects);
         }
 
