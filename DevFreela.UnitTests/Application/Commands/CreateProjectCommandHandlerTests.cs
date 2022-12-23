@@ -17,7 +17,12 @@ namespace DevFreela.UnitTests.Application.Commands
         public async Task InputDataIsOk_Executed_ReturnProjectId()
         {
             //Arrange
+            var unitOfWork = new Mock<IUnitOfWork>();
             var projectRepositoryMock = new Mock<IProjectRepository>();
+            var skillRepository = new Mock<ISkillRepository>();
+
+            unitOfWork.SetupGet(uow => uow.Projects).Returns(projectRepositoryMock.Object);
+            unitOfWork.SetupGet(uow => uow.Skills).Returns(skillRepository.Object);
 
             var createProjectCommand = new CreateProjectCommand
             {
@@ -28,7 +33,7 @@ namespace DevFreela.UnitTests.Application.Commands
                 IdFreelancer = 2
             };           
 
-            var createProjectCommandHandler = new CreateProjectCommandHandler(projectRepositoryMock.Object);
+            var createProjectCommandHandler = new CreateProjectCommandHandler(unitOfWork.Object);
 
             //Act
             var id = await createProjectCommandHandler.Handle(createProjectCommand, new CancellationToken());

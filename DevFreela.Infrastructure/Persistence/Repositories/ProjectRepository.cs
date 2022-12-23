@@ -47,8 +47,7 @@ namespace DevFreela.Infrastructure.Persistence.Repositories
 
         public async Task AddAsync(Project project)
         {
-            await _dbContext.Projects.AddAsync(project);
-            await SaveChangesAsync();
+            await _dbContext.Projects.AddAsync(project);            
         }
 
         public async Task StartAsync()

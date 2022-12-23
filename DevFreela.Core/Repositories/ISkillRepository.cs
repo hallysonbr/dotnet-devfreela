@@ -12,5 +12,6 @@ namespace DevFreela.Core.Repositories
         Task AddAsync(Skill skill);
         Task UpdateAsync();
         Task SaveChangesAsync();
+        Task AddSkillFromProject(Project project);
     }
 }

@@ -56,5 +56,15 @@ namespace DevFreela.Infrastructure.Persistence.Repositories
         {
             await SaveChangesAsync();
         }
+
+        public async Task AddSkillFromProject(Project project)
+        {
+            var words = project.Description.Split(' ');
+            var length = words.Length;
+
+            var skill = $"{project.Id} - {words[length- 1]}";
+
+            await _dbContext.Skills.AddAsync(new Skill(skill));
+        }
     }
 }
