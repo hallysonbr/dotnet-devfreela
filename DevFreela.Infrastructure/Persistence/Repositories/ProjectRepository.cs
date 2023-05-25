@@ -13,13 +13,13 @@ using System.Threading.Tasks;
 
 namespace DevFreela.Infrastructure.Persistence.Repositories
 {
-    public class ProjectRepository : IProjectRepository
+    public class ProjectRepository : RepositoryBase<Project>, IProjectRepository
     {
         private const int PAGE_SIZE = 2;
         private readonly DevFreelaDbContext _dbContext;
         private readonly string _connectionString;
 
-        public ProjectRepository(DevFreelaDbContext dbContext, IConfiguration configuration)
+        public ProjectRepository(DevFreelaDbContext dbContext, IConfiguration configuration) : base(dbContext)
         {
             _dbContext = dbContext;
             _connectionString = configuration.GetConnectionString("DevFreelaCs");

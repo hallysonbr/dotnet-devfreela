@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace DevFreela.Core.Repositories
 {
-    public interface IProjectRepository
+    public interface IProjectRepository : IRepositoryBase<Project>
     {
         Task<PaginationResult<Project>> GetAllAsync(string query, int page = 1);
         Task<Project> GetByIdAsync(int id);

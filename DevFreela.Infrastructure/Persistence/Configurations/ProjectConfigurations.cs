@@ -8,8 +8,14 @@ namespace DevFreela.Infrastructure.Persistence.Configurations
     {
         public void Configure(EntityTypeBuilder<Project> builder)
         {
+            builder.ToTable("Project");           
+
+           
             builder
                 .HasKey(p => p.Id);
+
+            builder.Property(p => p.Id).HasColumnType("int").UseIdentityColumn(1, 1).IsRequired();
+            builder.Property(p => p.Description).HasColumnType("varchar").HasMaxLength(100).IsRequired();
 
             builder
                 .HasOne(p => p.Freelancer)
